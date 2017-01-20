@@ -19,6 +19,7 @@ import com.fedex.ws.track.v12.GetTrackRequest;
 import com.fedex.ws.track.v12.WriteEventLog;
 import com.fedex.ws.track.v12.WriteEventLogResponse;
 import com.fedex.ws.track.v12.WriteEventLogResponse1;
+import com.fedex.ws.track.v12.WriteEventLogResponse2;
 
 @Endpoint
 public class FedexSoapController {

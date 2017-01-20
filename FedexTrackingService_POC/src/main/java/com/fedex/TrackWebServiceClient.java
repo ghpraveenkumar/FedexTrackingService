@@ -5,21 +5,43 @@ package com.fedex;
  *
  */
 
-import com.fedex.track.stub.*;
-import com.fedex.ws.track.v12.Localization;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.springframework.stereotype.Component;
+
+import com.fedex.track.stub.Address;
+import com.fedex.track.stub.ClientDetail;
+import com.fedex.track.stub.CompletedTrackDetail;
+import com.fedex.track.stub.CustomerExceptionRequestDetail;
+import com.fedex.track.stub.DeliveryOptionEligibilityDetail;
+import com.fedex.track.stub.Money;
+import com.fedex.track.stub.Notification;
+import com.fedex.track.stub.NotificationSeverityType;
+import com.fedex.track.stub.TrackChargeDetail;
+import com.fedex.track.stub.TrackDetail;
+import com.fedex.track.stub.TrackEvent;
+import com.fedex.track.stub.TrackIdentifierType;
+import com.fedex.track.stub.TrackOtherIdentifierDetail;
+import com.fedex.track.stub.TrackPackageIdentifier;
+import com.fedex.track.stub.TrackPortType;
+import com.fedex.track.stub.TrackReply;
+import com.fedex.track.stub.TrackRequest;
+import com.fedex.track.stub.TrackRequestProcessingOptionType;
+import com.fedex.track.stub.TrackSelectionDetail;
+import com.fedex.track.stub.TrackServiceLocator;
+import com.fedex.track.stub.TrackStatusAncillaryDetail;
+import com.fedex.track.stub.TrackStatusDetail;
+import com.fedex.track.stub.TrackingDateOrTimestamp;
+import com.fedex.track.stub.TransactionDetail;
+import com.fedex.track.stub.VersionId;
+import com.fedex.track.stub.WebAuthenticationCredential;
+import com.fedex.track.stub.WebAuthenticationDetail;
+import com.fedex.track.stub.Weight;
 import com.fedex.ws.track.v12.WriteEventLog;
 import com.fedex.ws.track.v12.WriteEventLogResponse;
 import com.fedex.ws.track.v12.WriteEventLogResponse1;
-
-import java.util.*;
-
-import javax.xml.bind.JAXBElement;
-
-import org.apache.hadoop.mapred.gethistory_jsp;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
-
-import scala.annotation.meta.setter;
+import com.fedex.ws.track.v12.WriteEventLogResponse2;
 
 /** 
  * Demo of using the Track service with Axis 
@@ -52,12 +74,24 @@ public class TrackWebServiceClient {
         VersionId versionId = new VersionId("trck", 12, 0, 0);
         request.setVersion(versionId);
         //
+    	ArrayList<TrackSelectionDetail> selectionDetailsList = new ArrayList<TrackSelectionDetail>();
+
+        for(int i=0;i<=trackingRequest.getTrackingNumber().size()-1;i++){
+        	//TrackSelectionDetail[] selectionDetails = new TrackSelectionDetail[trackingRequest.getTrackingNumber().length];
         TrackSelectionDetail selectionDetail=new TrackSelectionDetail();
         TrackPackageIdentifier packageIdentifier=new TrackPackageIdentifier();
         packageIdentifier.setType(TrackIdentifierType.TRACKING_NUMBER_OR_DOORTAG);
-        packageIdentifier.setValue(trackingRequest.getTrackingNumber());//(getSystemProperty("TrackingNumber"));// ("777927002747");//// tracking number
+        packageIdentifier.setValue(trackingRequest.getTrackingNumber().get(i));//(getSystemProperty("TrackingNumber"));// ("777927002747");//// tracking number
         selectionDetail.setPackageIdentifier(packageIdentifier);
-        request.setSelectionDetails(new TrackSelectionDetail[] {selectionDetail});
+        selectionDetailsList.add(selectionDetail);
+        //TrackSelectionDetail[] selectionDetails = selectionDetailsList.toArray(new TrackSelectionDetail[trackingRequest.getTrackingNumber().length]);
+      
+        
+      // selectionDetails[i] = selectionDetail; 
+        //request.setSelectionDetails(new TrackSelectionDetail[] {selectionDetail});
+       //request.setSelectionDetails(selectionDetails);
+       request.setSelectionDetails(selectionDetailsList.toArray(new TrackSelectionDetail[trackingRequest.getTrackingNumber().size()]));
+        }
         TrackRequestProcessingOptionType processingOption=TrackRequestProcessingOptionType.INCLUDE_DETAILED_SCANS;
         request.setProcessingOptions(new TrackRequestProcessingOptionType[]{processingOption});
 
@@ -90,6 +124,7 @@ public class TrackWebServiceClient {
 			com.fedex.ws.track.v12.TrackDetail trackDetail = new com.fedex.ws.track.v12.TrackDetail();
 			trackDetail.setTrackingNumber(reply.getCompletedTrackDetails()[0].getTrackDetails()[0].getTrackingNumber());
 			completedTrackDetail.getTrackDetails().add(trackDetail);
+			//customreply.setCompletedTrackDetails(completedTrackDetails);
 			customreply.getCompletedTrackDetails().add(completedTrackDetail);
 			//customreply.getHighestSeverity().value();
 			//reply.getHighestSeverity().getValue();

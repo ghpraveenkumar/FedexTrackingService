@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fedex.TrackWebServiceClient;
 import com.fedex.track.stub.TrackReply;
 import com.fedex.ws.track.v12.WriteEventLog;
+import com.fedex.ws.track.v12.WriteEventLogResponse;
 import com.fedex.ws.track.v12.WriteEventLogResponse1;
+import com.fedex.ws.track.v12.WriteEventLogResponse2;
 
 @RestController
 @RequestMapping("/track")
