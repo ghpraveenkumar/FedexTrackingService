@@ -5,8 +5,6 @@ package com.fedex.controller;
  *
  */
 
-import javax.xml.bind.JAXBElement;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -14,12 +12,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.fedex.TrackWebServiceClient;
-import com.fedex.track.stub.TrackReply;
-import com.fedex.ws.track.v12.GetTrackRequest;
+import com.fedex.WriteEventLogResponse1;
 import com.fedex.ws.track.v12.WriteEventLog;
-import com.fedex.ws.track.v12.WriteEventLogResponse;
-import com.fedex.ws.track.v12.WriteEventLogResponse1;
-import com.fedex.ws.track.v12.WriteEventLogResponse2;
 
 @Endpoint
 public class FedexSoapController {

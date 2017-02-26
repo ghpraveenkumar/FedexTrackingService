@@ -40,8 +40,7 @@ import com.fedex.track.stub.WebAuthenticationDetail;
 import com.fedex.track.stub.Weight;
 import com.fedex.ws.track.v12.WriteEventLog;
 import com.fedex.ws.track.v12.WriteEventLogResponse;
-import com.fedex.ws.track.v12.WriteEventLogResponse1;
-import com.fedex.ws.track.v12.WriteEventLogResponse2;
+//import com.fedex.ws.track.v12.WriteEventLogResponse2;
 
 /** 
  * Demo of using the Track service with Axis 

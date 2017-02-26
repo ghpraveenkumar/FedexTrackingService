@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fedex.TrackWebServiceClient;
+import com.fedex.WriteEventLogResponse1;
 import com.fedex.track.stub.TrackReply;
 import com.fedex.ws.track.v12.WriteEventLog;
-import com.fedex.ws.track.v12.WriteEventLogResponse;
-import com.fedex.ws.track.v12.WriteEventLogResponse1;
-import com.fedex.ws.track.v12.WriteEventLogResponse2;
 
 @RestController
 @RequestMapping("/track")
@@ -29,8 +27,8 @@ public class FedexRestController {
 
 @Autowired	
 private TrackWebServiceClient client;
-/*
-@RequestMapping({"trackingId"})	
+
+/*@RequestMapping({"trackingId"})	
  public TrackReply trackingService(@PathVariable("trackingId") String trackingId){
 	return client.trackWebServiceClient(trackingId);
  }*/
